@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jPF-0B-uMU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYi-VE-Os0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -113,14 +113,38 @@
             </objects>
             <point key="canvasLocation" x="1752.1739130434785" y="132.58928571428572"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="a8D-0b-jUW">
             <objects>
-                <viewController id="BYi-VE-Os0" sceneMemberID="viewController">
+                <viewController id="BYi-VE-Os0" customClass="DetailViewController" customModule="_3WeatherToday" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EZh-WU-bHX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lNh-yX-qrH">
+                                <rect key="frame" x="132" y="94" width="150" height="150"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="1lB-do-3uR"/>
+                                    <constraint firstAttribute="width" constant="150" id="SYp-98-I3c"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBm-FA-Hed">
+                                <rect key="frame" x="0.0" y="294" width="414" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ZBm-FA-Hed" firstAttribute="top" secondItem="lNh-yX-qrH" secondAttribute="bottom" constant="50" id="G4d-Tb-O14"/>
+                            <constraint firstItem="lNh-yX-qrH" firstAttribute="top" secondItem="w1Z-I3-oDw" secondAttribute="top" constant="50" id="Q8W-sn-pyf"/>
+                            <constraint firstItem="ZBm-FA-Hed" firstAttribute="leading" secondItem="w1Z-I3-oDw" secondAttribute="leading" id="R9u-Wb-WEE"/>
+                            <constraint firstItem="w1Z-I3-oDw" firstAttribute="trailing" secondItem="ZBm-FA-Hed" secondAttribute="trailing" id="kKv-iE-p64"/>
+                            <constraint firstItem="ZBm-FA-Hed" firstAttribute="centerX" secondItem="EZh-WU-bHX" secondAttribute="centerX" id="lLj-te-0k7"/>
+                            <constraint firstItem="lNh-yX-qrH" firstAttribute="centerX" secondItem="EZh-WU-bHX" secondAttribute="centerX" id="ni3-ih-hTX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="w1Z-I3-oDw"/>
                     </view>
                 </viewController>
