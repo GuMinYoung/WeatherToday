@@ -35,9 +35,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="jPF-0B-uMU" kind="push" id="CSu-JC-PwZ"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -63,7 +60,7 @@
         <!--City View Controller-->
         <scene sceneID="njt-5S-6rO">
             <objects>
-                <viewController id="jPF-0B-uMU" customClass="CityViewController" customModule="_3WeatherToday" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cityViewController" id="jPF-0B-uMU" customClass="CityViewController" customModule="_3WeatherToday" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oxe-D2-V4N">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

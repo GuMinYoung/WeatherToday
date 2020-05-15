@@ -15,6 +15,7 @@ class CountryViewController: UIViewController {
     // MARK:- Properties
     let cellIdentifier = "countryCell"
     var countries = [Country]()
+    var country: String?
     
     // MARK:- Methods
     // MARK: Life Cycle
@@ -22,25 +23,19 @@ class CountryViewController: UIViewController {
         super.viewDidLoad()
 
         tableView?.dataSource = self
+        tableView?.delegate = self
         self.navigationItem.title = "세계 날씨"
         
         let jsonDecoder = JSONDecoder()
         guard let dataAsset = NSDataAsset(name: "countries") else {return}
         
         do {
-            // dataAsset.data를 [Friend] 타입으로 디코딩
             self.countries = try jsonDecoder.decode([Country].self, from: dataAsset.data)
         } catch {
             print(error)
         }
         
         tableView?.reloadData()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard let cityViewController = segue.destination as? CityViewController, let cell = sender as? UITableViewCell  else {return}
-        cityViewController.navigationTitle = cell.textLabel?.text
     }
 }
 
@@ -55,9 +50,23 @@ extension CountryViewController: UITableViewDataSource {
         
         let koreanName = countries[indexPath.row].koreanName
         let assetName = "flag_" + countries[indexPath.row].assetName
+        
         cell.imageView?.image = UIImage(named: assetName)
         cell.textLabel?.text = koreanName
         return cell
+    }
+}
+
+// MARK: UITableViewDelegate
+extension CountryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let identifier = "cityViewController"
+        guard let nextViewController = storyboard?.instantiateViewController(withIdentifier: identifier) as? CityViewController else {return}
+        
+        nextViewController.navigationTitle = countries[indexPath.row].koreanName
+        nextViewController.country = countries[indexPath.row].assetName
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
 

@@ -16,10 +16,10 @@ class CityViewController: UIViewController {
     let cellIdentifier = "cityCell"
     var cities = [City]()
     var navigationTitle: String?
+    var country: String?
     
     // MARK:- Methods
     // MARK: Life Cycle
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -30,35 +30,32 @@ class CityViewController: UIViewController {
         super.viewDidLoad()
         tableView?.dataSource = self
         
-
-        // Do any additional setup after loading the view.
+        let jsonDecoder = JSONDecoder()
+        guard let assetName = country, let dataAsset = NSDataAsset(name: assetName) else {return}
+        
+        do {
+            self.cities = try jsonDecoder.decode([City].self, from: dataAsset.data)
+        } catch {
+            print(error)
+        }
+        
+        tableView?.reloadData()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 // MARK: UITableViewDataSource
 extension CityViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return cities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let city = cities[indexPath.row]
         cell.imageView?.image = UIImage(named: "flag_kr")
-        cell.textLabel?.text = "도시"
+        cell.textLabel?.text = city.name
         cell.detailTextLabel?.numberOfLines = 2
-        cell.detailTextLabel?.text = "섭씨" + " / " + "화씨" + "\n" + "강수확률"
+        cell.detailTextLabel?.text = city.fullTemperature + "강수확률 \(city.rainfallProbability)%"
         return cell
     }
 }
