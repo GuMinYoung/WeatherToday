@@ -14,7 +14,7 @@ class CountryViewController: UIViewController {
     
     // MARK:- Properties
     let cellIdentifier = "countryCell"
-    var countrys = [Country]()
+    var countries = [Country]()
     
     // MARK:- Methods
     // MARK: Life Cycle
@@ -22,29 +22,46 @@ class CountryViewController: UIViewController {
         super.viewDidLoad()
 
         tableView?.dataSource = self
-        tableView?.delegate = self
         self.navigationItem.title = "세계 날씨"
-        // Do any additional setup after loading the view.
+        
+        let jsonDecoder = JSONDecoder()
+        guard let dataAsset = NSDataAsset(name: "countries") else {return}
+        
+        do {
+            // dataAsset.data를 [Friend] 타입으로 디코딩
+            self.countries = try jsonDecoder.decode([Country].self, from: dataAsset.data)
+        } catch {
+            print(error)
+        }
+        
+        tableView?.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let cityViewController = segue.destination as? CityViewController, let cell = sender as? UITableViewCell  else {return}
+        cityViewController.navigationTitle = cell.textLabel?.text
     }
 }
 
 // MARK: UITableViewDataSource
 extension CountryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.imageView?.image = UIImage(named: "flag_kr")
-        cell.textLabel?.text = "한국"
+        
+        let koreanName = countries[indexPath.row].koreanName
+        let assetName = "flag_" + countries[indexPath.row].assetName
+        cell.imageView?.image = UIImage(named: assetName)
+        cell.textLabel?.text = koreanName
         return cell
     }
 }
 
-// MARK: UITableViewDelegate
-extension CountryViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
-    }
-}
+// 추가
+// 1. Index Out of Range 체크
+// 2. 다음 화면으로 갔다가 돌아왔을 때 셀 선택 해제하기
+// 3. viewDidLoad 정리

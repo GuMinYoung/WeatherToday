@@ -15,13 +15,22 @@ class CityViewController: UIViewController {
     // MARK:- Properties
     let cellIdentifier = "cityCell"
     var cities = [City]()
+    var navigationTitle: String?
     
     // MARK:- Methods
     // MARK: Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationItem.title = navigationTitle
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView?.dataSource = self
-        tableView?.delegate = self
+        
+
         // Do any additional setup after loading the view.
     }
     
@@ -51,12 +60,5 @@ extension CityViewController: UITableViewDataSource {
         cell.detailTextLabel?.numberOfLines = 2
         cell.detailTextLabel?.text = "섭씨" + " / " + "화씨" + "\n" + "강수확률"
         return cell
-    }
-}
-
-// MARK: UITableViewDelegate
-extension CityViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
     }
 }
