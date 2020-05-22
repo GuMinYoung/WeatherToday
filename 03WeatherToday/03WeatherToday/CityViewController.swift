@@ -50,12 +50,12 @@ extension CityViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CityCell else {return UITableViewCell()}
         let city = cities[indexPath.row]
-        cell.imageView?.image = UIImage(named: "flag_kr")
-        cell.textLabel?.text = city.name
-        cell.detailTextLabel?.numberOfLines = 2
-        cell.detailTextLabel?.text = city.fullTemperature + "강수확률 \(city.rainfallProbability)%"
+        cell.weatherImageView?.image = city.weatherAndImage.image
+        cell.nameLabel?.text = city.name
+        cell.temperatureLabel?.text = city.fullTemperature
+        cell.rainfallLabel?.text = "강수확률 \(city.rainfallProbability)%"
         return cell
     }
 }
