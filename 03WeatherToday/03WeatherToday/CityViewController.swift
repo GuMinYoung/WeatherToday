@@ -29,6 +29,7 @@ class CityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView?.dataSource = self
+        tableView?.delegate = self
         
         let jsonDecoder = JSONDecoder()
         guard let assetName = country, let dataAsset = NSDataAsset(name: assetName) else {return}
@@ -57,5 +58,18 @@ extension CityViewController: UITableViewDataSource {
         cell.temperatureLabel?.text = city.fullTemperature
         cell.rainfallLabel?.text = "강수확률 \(city.rainfallProbability)%"
         return cell
+    }
+}
+
+// MARK: UITableViewDelegate
+extension CityViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                let identifier = "detailViewController"
+        guard let nextViewController = storyboard?.instantiateViewController(withIdentifier: identifier) as? DetailViewController else {return}
+        
+        nextViewController.navigationTitle = cities[indexPath.row].name
+        nextViewController.city = cities[indexPath.row]
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
