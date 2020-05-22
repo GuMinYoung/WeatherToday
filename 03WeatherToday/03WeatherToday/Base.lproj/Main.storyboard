@@ -172,7 +172,22 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBm-FA-Hed">
-                                <rect key="frame" x="0.0" y="294" width="414" height="20.5"/>
+                                <rect key="frame" x="10" y="294" width="394" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="uR7-44-zbg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5h-vd-Xa2">
+                                <rect key="frame" x="10" y="360" width="394" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A66-X8-qUo">
+                                <rect key="frame" x="10" y="327" width="394" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -180,15 +195,28 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="m5h-vd-Xa2" firstAttribute="top" secondItem="A66-X8-qUo" secondAttribute="bottom" constant="12.5" id="0nU-9o-M7T"/>
+                            <constraint firstItem="A66-X8-qUo" firstAttribute="top" secondItem="ZBm-FA-Hed" secondAttribute="bottom" constant="12.5" id="5yJ-xx-O9v"/>
+                            <constraint firstItem="m5h-vd-Xa2" firstAttribute="leading" secondItem="ZBm-FA-Hed" secondAttribute="leading" id="7wT-Cn-df6"/>
                             <constraint firstItem="ZBm-FA-Hed" firstAttribute="top" secondItem="lNh-yX-qrH" secondAttribute="bottom" constant="50" id="G4d-Tb-O14"/>
+                            <constraint firstItem="ZBm-FA-Hed" firstAttribute="leading" secondItem="w1Z-I3-oDw" secondAttribute="leading" constant="10" id="H0Y-V1-dFE"/>
+                            <constraint firstItem="m5h-vd-Xa2" firstAttribute="trailing" secondItem="ZBm-FA-Hed" secondAttribute="trailing" id="Pfe-fh-PXQ"/>
                             <constraint firstItem="lNh-yX-qrH" firstAttribute="top" secondItem="w1Z-I3-oDw" secondAttribute="top" constant="50" id="Q8W-sn-pyf"/>
-                            <constraint firstItem="ZBm-FA-Hed" firstAttribute="leading" secondItem="w1Z-I3-oDw" secondAttribute="leading" id="R9u-Wb-WEE"/>
-                            <constraint firstItem="w1Z-I3-oDw" firstAttribute="trailing" secondItem="ZBm-FA-Hed" secondAttribute="trailing" id="kKv-iE-p64"/>
-                            <constraint firstItem="ZBm-FA-Hed" firstAttribute="centerX" secondItem="EZh-WU-bHX" secondAttribute="centerX" id="lLj-te-0k7"/>
+                            <constraint firstItem="A66-X8-qUo" firstAttribute="leading" secondItem="ZBm-FA-Hed" secondAttribute="leading" id="T6o-4V-orO"/>
+                            <constraint firstItem="A66-X8-qUo" firstAttribute="trailing" secondItem="ZBm-FA-Hed" secondAttribute="trailing" id="gwO-Eb-mvA"/>
                             <constraint firstItem="lNh-yX-qrH" firstAttribute="centerX" secondItem="EZh-WU-bHX" secondAttribute="centerX" id="ni3-ih-hTX"/>
+                            <constraint firstItem="w1Z-I3-oDw" firstAttribute="trailing" secondItem="ZBm-FA-Hed" secondAttribute="trailing" constant="10" id="vQX-rB-L5V"/>
+                            <constraint firstItem="A66-X8-qUo" firstAttribute="height" secondItem="ZBm-FA-Hed" secondAttribute="height" id="vbo-ZK-vkg"/>
+                            <constraint firstItem="m5h-vd-Xa2" firstAttribute="height" secondItem="ZBm-FA-Hed" secondAttribute="height" id="y7x-uM-uGE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="w1Z-I3-oDw"/>
                     </view>
+                    <connections>
+                        <outlet property="rainfallLabel" destination="m5h-vd-Xa2" id="ohT-9w-2jS"/>
+                        <outlet property="temperatureLabel" destination="A66-X8-qUo" id="kaJ-yY-YNh"/>
+                        <outlet property="weatherImageView" destination="lNh-yX-qrH" id="PLy-NK-e2d"/>
+                        <outlet property="weatherLabel" destination="ZBm-FA-Hed" id="Nci-Bv-mcH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mue-ZK-PvY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
