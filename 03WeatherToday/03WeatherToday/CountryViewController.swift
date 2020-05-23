@@ -24,6 +24,7 @@ class CountryViewController: UIViewController {
 
         tableView?.dataSource = self
         tableView?.delegate = self
+        
         self.navigationItem.title = "세계 날씨"
         
         let jsonDecoder = JSONDecoder()

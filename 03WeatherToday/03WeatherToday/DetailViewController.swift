@@ -24,27 +24,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        guard let city = city,
+            let title = navigationTitle else {return}
         
-        guard let city = city, let title = navigationTitle else {return}
         self.navigationItem.title = title
+        
         weatherImageView?.image = city.weatherAndImage.image
         weatherLabel?.text = city.weatherAndImage.weather
         temperatureLabel?.text = city.fullTemperature
         rainfallLabel?.text = "강수확률 \(city.rainfallProbability)%"
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

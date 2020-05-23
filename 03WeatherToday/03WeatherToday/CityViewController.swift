@@ -20,19 +20,17 @@ class CityViewController: UIViewController {
     
     // MARK:- Methods
     // MARK: Life Cycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationItem.title = navigationTitle
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView?.dataSource = self
         tableView?.delegate = self
         
+        self.navigationItem.title = navigationTitle
+        
         let jsonDecoder = JSONDecoder()
-        guard let assetName = country, let dataAsset = NSDataAsset(name: assetName) else {return}
+        guard let assetName = country,
+            let dataAsset = NSDataAsset(name: assetName) else {return}
         
         do {
             self.cities = try jsonDecoder.decode([City].self, from: dataAsset.data)
