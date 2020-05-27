@@ -22,11 +22,21 @@ class CountryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView?.dataSource = self
-        tableView?.delegate = self
+        initDelegate()
         
         self.navigationItem.title = "세계 날씨"
         
+        setUpDataFromJson()
+        tableView?.reloadData()
+    }
+    
+    // MARK: Custom Method
+    func initDelegate() {
+        tableView?.dataSource = self
+        tableView?.delegate = self
+    }
+    
+    func setUpDataFromJson() {
         let jsonDecoder = JSONDecoder()
         guard let dataAsset = NSDataAsset(name: "countries") else {return}
         
@@ -35,8 +45,6 @@ class CountryViewController: UIViewController {
         } catch {
             print(error)
         }
-        
-        tableView?.reloadData()
     }
 }
 

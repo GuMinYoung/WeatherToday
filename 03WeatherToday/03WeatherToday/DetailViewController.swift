@@ -23,12 +23,15 @@ class DetailViewController: UIViewController {
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard let city = city,
-            let title = navigationTitle else {return}
         
+        setUpData()
+    }
+    
+    // MARK: Custom Method
+    func setUpData() {
         self.navigationItem.title = title
         
+        guard let city = city else {return}
         weatherImageView?.image = city.weatherAndImage.image
         weatherLabel?.text = city.weatherAndImage.weather
         temperatureLabel?.text = city.fullTemperature

@@ -23,27 +23,36 @@ class CityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView?.dataSource = self
-        tableView?.delegate = self
+        initDelegate()
         
         self.navigationItem.title = navigationTitle
-        
-        let jsonDecoder = JSONDecoder()
-        guard let assetName = country,
-            let dataAsset = NSDataAsset(name: assetName) else {return}
-        
-        do {
-            self.cities = try jsonDecoder.decode([City].self, from: dataAsset.data)
-        } catch {
-            print(error)
-        }
-        
+
+        setUpDataFromJson()
         tableView?.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         guard let selectedIndexPath = tableView?.indexPathForSelectedRow else {return}
         tableView?.deselectRow(at: selectedIndexPath, animated: false)
+    }
+    
+    // MARK: Custom Method
+    func initDelegate() {
+        tableView?.dataSource = self
+        tableView?.delegate = self
+    }
+    
+    func setUpDataFromJson() {
+        let jsonDecoder = JSONDecoder()
+        guard let assetName = country,
+            let dataAsset = NSDataAsset(name: assetName) else {return}
+        
+        do {
+            self.cities = try jsonDecoder.decode([City].self, from:
+                dataAsset.data)
+        } catch {
+            print(error)
+        }
     }
 }
 
