@@ -54,8 +54,13 @@ extension CityViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CityCell else {return UITableViewCell()}
-        let city = cities[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CityCell,
+            let city = cities[safeIndex: indexPath.row] else {
+            let defaultCell = UITableViewCell()
+            defaultCell.textLabel?.text = "데이터를 표시할 수 없습니다."
+            return defaultCell
+        }
+        
         cell.weatherImageView?.image = city.weatherAndImage.image
         cell.nameLabel?.text = city.name
         cell.temperatureLabel?.text = city.fullTemperature
@@ -68,10 +73,14 @@ extension CityViewController: UITableViewDataSource {
 extension CityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 let identifier = "detailViewController"
-        guard let nextViewController = storyboard?.instantiateViewController(withIdentifier: identifier) as? DetailViewController else {return}
+        guard let nextViewController = storyboard?.instantiateViewController(withIdentifier: identifier) as? DetailViewController,
+        let city = cities[safeIndex: indexPath.row] else {
+            print("화면 전환 불가: 올바른 인덱스가 아닙니다.")
+            return
+        }
         
-        nextViewController.navigationTitle = cities[indexPath.row].name
-        nextViewController.city = cities[indexPath.row]
+        nextViewController.navigationTitle = city.name
+        nextViewController.city = city
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }

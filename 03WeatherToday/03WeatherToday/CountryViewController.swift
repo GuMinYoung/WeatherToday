@@ -48,9 +48,13 @@ extension CountryViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        
-        let koreanName = countries[indexPath.row].koreanName
-        let assetName = "flag_" + countries[indexPath.row].assetName
+        guard let country = countries[safeIndex: indexPath.row] else {
+            let defaultCell = UITableViewCell()
+            defaultCell.textLabel?.text = "데이터를 표시할 수 없습니다."
+            return defaultCell
+        }
+        let koreanName = country.koreanName
+        let assetName = "flag_" + country.assetName
         
         cell.imageView?.image = UIImage(named: assetName)
         cell.textLabel?.text = koreanName
@@ -62,16 +66,14 @@ extension CountryViewController: UITableViewDataSource {
 extension CountryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let identifier = "cityViewController"
-        guard let nextViewController = storyboard?.instantiateViewController(withIdentifier: identifier) as? CityViewController else {return}
+        guard let nextViewController = storyboard?.instantiateViewController(withIdentifier: identifier) as? CityViewController,
+        let country = countries[safeIndex: indexPath.row] else {
+            print("화면 전환 불가: 올바른 인덱스가 아닙니다.")
+            return}
         
-        nextViewController.navigationTitle = countries[indexPath.row].koreanName
-        nextViewController.country = countries[indexPath.row].assetName
+        nextViewController.navigationTitle = country.koreanName
+        nextViewController.country = country.assetName
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
-
-// 추가
-// 1. Index Out of Range 체크
-// 2. 다음 화면으로 갔다가 돌아왔을 때 셀 선택 해제하기
-// 3. viewDidLoad 정리
