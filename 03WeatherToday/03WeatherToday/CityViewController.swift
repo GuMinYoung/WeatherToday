@@ -40,6 +40,11 @@ class CityViewController: UIViewController {
         
         tableView?.reloadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let selectedIndexPath = tableView?.indexPathForSelectedRow else {return}
+        tableView?.deselectRow(at: selectedIndexPath, animated: false)
+    }
 }
 
 // MARK: UITableViewDataSource
