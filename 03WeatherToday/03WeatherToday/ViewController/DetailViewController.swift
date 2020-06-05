@@ -29,7 +29,7 @@ class DetailViewController: UIViewController {
     
     // MARK: Custom Method
     func setUpData() {
-        self.navigationItem.title = title
+        self.navigationItem.title = navigationTitle
         
         guard let city = city else {return}
         weatherImageView?.image = city.weatherAndImage.image
