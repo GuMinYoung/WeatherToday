@@ -35,6 +35,8 @@ struct City: Codable {
         case rainy = "비"
         case snowy = "눈"
         
+        // 열거형의 rawValue 타입으로 (String, UIImage?)를 사용하려 했으나 튜플은 사용할 수 없다.
+        // => 연산 프로퍼티로 날씨에 따라 이미지를 설정했다.
         var image: UIImage? {
             switch self {
             case .sunny:
@@ -65,6 +67,9 @@ struct City: Codable {
         return "섭씨 \(self.celsius)도 / " + "화씨 " + fahrenheitToString + "도"
     }
     
+    // MARK:- *코드리뷰
+    // 튜플로 데이터를 리턴해준 점이 인상적입니다 :)
+    // ViewController내에서 처리하지 않고 Struct내에서 처리하여 ViewController의 코드가 더욱 깔끔해졌습니다.
     var weatherAndImage: (weather: String, image: UIImage?) {
         switch self.state {
         case 10:
