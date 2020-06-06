@@ -19,11 +19,34 @@ import UIKit
 */
 
 struct City: Codable {
+    // MARK:- *코드리뷰
+    // 이런 경우는 보통 struct가 아닌 enum을 사용하는 편이 좋습니다.
+    /*
     struct WeatherAndImage {
         static let sunny = ("맑음", UIImage(named: "sunny"))
         static let cloudy = ("구름", UIImage(named: "cloudy"))
         static let rainy = ("비", UIImage(named: "rainy"))
         static let snowy = ("눈", UIImage(named: "snowy"))
+    }
+    */
+    enum Weather: String {
+        case sunny = "맑음"
+        case cloudy = "구름"
+        case rainy = "비"
+        case snowy = "눈"
+        
+        var image: UIImage? {
+            switch self {
+            case .sunny:
+                return UIImage(named: "sunny")
+            case .cloudy:
+                return UIImage(named: "cloudy")
+            case .rainy:
+                return UIImage(named: "rainy")
+            case .snowy:
+                return UIImage(named: "snowy")
+            }
+        }
     }
     
     let name: String
@@ -45,13 +68,13 @@ struct City: Codable {
     var weatherAndImage: (weather: String, image: UIImage?) {
         switch self.state {
         case 10:
-            return WeatherAndImage.sunny
+            return (Weather.sunny.rawValue, Weather.sunny.image)
         case 11:
-            return WeatherAndImage.cloudy
+            return (Weather.cloudy.rawValue, Weather.cloudy.image)
         case 12:
-            return WeatherAndImage.rainy
+            return (Weather.rainy.rawValue, Weather.rainy.image)
         case 13:
-            return WeatherAndImage.snowy
+            return (Weather.snowy.rawValue, Weather.snowy.image)
         default:
             return ("정보 없음", nil)
         }
