@@ -15,8 +15,7 @@ class CityViewController: UIViewController {
     // MARK:- Properties
     let cellIdentifier = "cityCell"
     var cities = [City]()
-    var navigationTitle: String?
-    var country: String?
+    var country: Country?
     
     // MARK:- Methods
     // MARK: Life Cycle
@@ -24,11 +23,8 @@ class CityViewController: UIViewController {
         super.viewDidLoad()
         
         initDelegate()
-        
-        self.navigationItem.title = navigationTitle
-
+        self.navigationItem.title = country?.koreanName
         setUpDataFromJson()
-        tableView?.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +40,7 @@ class CityViewController: UIViewController {
     
     func setUpDataFromJson() {
         let jsonDecoder = JSONDecoder()
-        guard let assetName = country,
+        guard let assetName = country?.assetName,
             let dataAsset = NSDataAsset(name: assetName) else {return}
         
         do {
@@ -53,6 +49,7 @@ class CityViewController: UIViewController {
         } catch {
             print(error)
         }
+        tableView?.reloadData()
     }
 }
 
@@ -88,7 +85,6 @@ extension CityViewController: UITableViewDelegate {
             return
         }
         
-        nextViewController.navigationTitle = city.name
         nextViewController.city = city
         
         self.navigationController?.pushViewController(nextViewController, animated: true)

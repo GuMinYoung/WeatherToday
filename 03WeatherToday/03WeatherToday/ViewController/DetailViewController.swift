@@ -17,7 +17,6 @@ class DetailViewController: UIViewController {
     
     // MARK:- Properties
     var city: City?
-    var navigationTitle: String?
     
     // MARK:- Methods
     // MARK: Life Cycle
@@ -29,7 +28,7 @@ class DetailViewController: UIViewController {
     
     // MARK: Custom Method
     func setUpData() {
-        self.navigationItem.title = navigationTitle
+        self.navigationItem.title = city?.name
         
         guard let city = city else {return}
         weatherImageView?.image = city.weatherAndImage.image

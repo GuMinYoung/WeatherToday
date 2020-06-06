@@ -82,12 +82,14 @@ extension CountryViewController: UITableViewDelegate {
         guard let nextViewController = storyboard?.instantiateViewController(withIdentifier: identifier) as? CityViewController,
         let country = countries[safeIndex: indexPath.row] else {
             print("화면 전환 불가: 올바른 인덱스가 아닙니다.")
-            return}
+            return
+        }
         
         // MARK:- *코드리뷰
         // navigationTitle은 country 데이터 내부에 있는 koreanName이므로 CityViewController에서 country데이터에서 활용하는 것이 좋을 것 같습니다.
-        nextViewController.navigationTitle = country.koreanName
-        nextViewController.country = country.assetName
+        //nextViewController.navigationTitle = country.koreanName
+        //nextViewController.country = country.assetName
+        nextViewController.country = country
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
